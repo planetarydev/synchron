@@ -12,21 +12,30 @@ npm install synchron --save
 ## Using Synchron
 
 Create a new instance of Synchro and use the methods `return` and `throw`. The `wait` method will wait until
-`return` or `throw` was executed.
+`return` or `throw` was called.
 
 ```javascript
 var asyncTimeout = new Synchron();
 
 setTimeout(function(){
-	asyncTimeout.return('success');
+	// do something
+	console.log('inside setTimeout');
+	// and than call done
+	asyncTimeout.done();
 }, 500);
 
-var ret = asyncTimeout.wait();
-console.log(ret); // --> "success"
+// non-blocking wait until done was called
+asyncTimeout.wait();
+console.log('back in main');
+
+// this will output:
+// --------------------
+// inside setTimeout
+// back in main
 ```
 
-Create a new instance and pass a function to wrap the asnyc function into a synchron function call.
-The warpped function will run in the context of Synchron, so you can use `this.return` and/or `this.throw`.
+Create a new instance and pass a function to wrap the asnyc call into a synchron function.
+The warpped function will run in the context of `Synchron`, so you can use `this.return` and/or `this.throw`.
 If you like to exit the async function without returning a result just call `this.return()` without a parameter or call `this.done()`.
 
 ```javascript
@@ -43,9 +52,11 @@ var readFileSync = new Synchron(function(filename) {
 });
 
 try {
+	// here is the synchron function call
 	var data = readFileSync('./testfile.txt');
 	console.log(data);
 } catch (err){
+	// if an error occours the function will throw it and you can catch it
 	console.log(err); // maybe an error like: "ENOENT: no such file or directory, open './testfile.txt'"
 }
 ```
