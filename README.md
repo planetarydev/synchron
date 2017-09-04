@@ -14,6 +14,8 @@ Create a new instance of Synchro and use the methods `return` and `throw`. The `
 `return` or `throw` was called.
 
 ```javascript
+const { Synchron } = require('synchron');
+
 var asyncTimeout = new Synchron();
 
 setTimeout(function(){
@@ -38,6 +40,8 @@ The warpped function will run in the context of `Synchron`, so you can use `this
 If you like to exit the async function without returning a result just call `this.return()` without a parameter or call `this.done()`.
 
 ```javascript
+const { Synchron } = require('synchron');
+
 var readFileSync = new Synchron(function(filename) {
 	var fs = require('fs');
 
