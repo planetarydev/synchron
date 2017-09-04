@@ -36,7 +36,7 @@ describe('Synchron', function() {
 	});
 
 	describe('run()', function() {
-		it('should sleep the give time', function() {
+		it('should sleep the given time', function() {
 			var sleepSync = new Synchron(function(waitForMs) {
 				setTimeout(() => {
 					this.done();
@@ -72,6 +72,27 @@ describe('Synchron', function() {
 				expect(err).to.be.instanceOf(Error);
 				expect(err.message).to.equal('ENOENT: no such file or directory, open \'./testfile.txt\'');
 			}
+		});
+	});
+
+	describe('run()', function() {
+		it('should sleep without blocking', function() {
+			var sleepWithoutBlockingSync = new Synchron(function(waitForMs) {
+				setTimeout(() => {
+					this.done();
+				}, waitForMs);
+			});
+
+			var counter = 0;
+			var intervalId = setInterval(function () {
+				counter++;
+			}, 100);
+
+			sleepWithoutBlockingSync(1000);
+
+			clearInterval(intervalId);
+
+			expect(counter).to.be.at.least(9);
 		});
 	});
 });
