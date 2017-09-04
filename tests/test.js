@@ -36,26 +36,42 @@ describe('Synchron', function() {
 	});
 
 	describe('run()', function() {
-		it('should wait until async function finished with error or results', function() {
-			var asyncResult = new Synchron(function() {
+		it('should sleep the give time', function() {
+			var sleepSync = new Synchron(function(waitForMs) {
 				setTimeout(() => {
-					this.return('success');
-				}, 500);
-			}).run();
-
-			expect(asyncResult).to.equal('success');
-		});
-
-		it('should wait until async function finished with error or results', function() {
-			var setTimeoutSync = new Synchron(function() {
-				setTimeout(() => {
-					this.return('success');
-				}, 500);
+					this.done();
+				}, waitForMs);
 			});
 
-			var ret = setTimeoutSync.run();
-			
-			expect(ret).to.equal('success');
+			var start = new Date();
+			sleepSync(1000);
+			var elapsed = new Date() - start;
+
+			expect(elapsed).to.be.at.least(1000);
+		});
+	});
+
+	describe('run()', function() {
+		it('should read the file and return the data or throw an error', function() {
+			var readFileSync = new Synchron(function(filename) {
+				var fs = require('fs');
+
+				fs.readFile(filename, 'utf8', (err, data) => {
+					if (err) {
+						this.throw(err);
+					} else {
+						this.return(data);
+					}
+				});
+			});
+
+			try {
+				var ret = readFileSync('./testfile.txt');
+				expect(ret).to.equal('This is a test.\n');
+			} catch (err){
+				expect(err).to.be.instanceOf(Error);
+				expect(err.message).to.equal('ENOENT: no such file or directory, open \'./testfile.txt\'');
+			}
 		});
 	});
 });
