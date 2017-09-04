@@ -1,6 +1,6 @@
 {
   "name": "synchron",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Wait till async functions end and forces a synchron process without blocking",
   "main": "index.js",
   "scripts": {
