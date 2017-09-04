@@ -1,7 +1,6 @@
 # Synchron
 
-Wrapping async functions like `fibers/future` without the need of a Fiber.
-Still force a synchron execution and wait til the result or an error is present **without blocking**.
+Wrapping an async function into a synchron function call **without blocking**.
 
 ## Install
 
@@ -28,8 +27,8 @@ setTimeout(function(){
 asyncTimeout.wait();
 console.log('back in main');
 
-// this will output:
-// --------------------
+// output:
+// -------
 // inside setTimeout
 // back in main
 ```
