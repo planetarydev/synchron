@@ -4,7 +4,12 @@
   "description": "Wait till async functions end and forces a synchron process without blocking",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests/ --recursive"
+    "test": "mocha tests/ --recursive",
+    "eslint": "./node_modules/.bin/eslint index.js ./tests/ --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/planetarydev/synchron.git"
   },
   "keywords": [
     "sync",
@@ -14,5 +19,13 @@
     "synchron"
   ],
   "author": "planetarydev",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.6.1",
+    "mocha": "^3.5.0"
+  },
+  "dependencies": {
+    "deasync": "^0.1.10"
+  }
 }
