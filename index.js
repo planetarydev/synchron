@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const deasync = require('deasync');
 
@@ -35,8 +35,8 @@ class Synchron {
 
 	wait(){
 		while(!this._finished) {
-    		deasync.runLoopOnce();
-  		}
+			deasync.runLoopOnce();
+		}
 
 		if (this._error){
 			throw this._error;

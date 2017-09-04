@@ -27,7 +27,7 @@ describe('Synchron', function() {
 			}, 500);
 
 			try {
-				var ret = asyncTimeout.wait();
+				asyncTimeout.wait();
 			} catch (err){
 				expect(err).to.be.instanceOf(Error);
 				expect(err.message).to.equal('Some error happend');
