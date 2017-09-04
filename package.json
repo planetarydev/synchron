@@ -1,0 +1,18 @@
+{
+  "name": "synchron",
+  "version": "1.0.0",
+  "description": "Wait till async functions end and forces a synchron process without blocking",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/ --recursive"
+  },
+  "keywords": [
+    "sync",
+    "async",
+    "future",
+    "force",
+    "synchron"
+  ],
+  "author": "planetarydev",
+  "license": "MIT"
+}
